@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Client1</h1>
+    <button onclick="sendMsg()">Send msg</button>
+</body>
+<script>
+    const socket = new WebSocket('ws://localhost:9999');
+
+    socket.addEventListener('open', function(event) {
+        console.log('Connected to the Server!')
+    });
+    
+    socket.addEventListener('close', function(event) {
+        console.log('Disconnected to the Server!')
+    });
+    
+    socket.addEventListener('message', function(event) {
+        console.log('Message from Server: ', event.data)
+    });
+
+    const sendMsg = () => {
+        socket.send('Hello from Client 1')
+    }
+    
+</script>
+</html>
